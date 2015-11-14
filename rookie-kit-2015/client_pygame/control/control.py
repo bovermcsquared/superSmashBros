@@ -166,11 +166,21 @@ class Control(BaseControl):
         if 1 in newbuttons:
             if mouse_position[0] in range(340, 556):
                 if mouse_position[1] in range(39, 147):
+
                     self.set_state(CONTROL_STATE_WANT_DUAL)
+
+                    self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+##        elif pygame.K_q in newkeys:
+
                 elif mouse_position == (187, 295):
                     self.set_state(CONTROL_STATE_WANT_SINGLE)
                 elif mouse_position == (335, 443):
+
                     self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+
+                    self.set_state(CONTROL_STATE_WANT_DUAL)
+##        elif pygame.K_v in newkeys:
+
                 elif mouse_position == (483, 591):
                     self.set_state(CONTROL_STATE_WANT_VIEW)
         # elif buttonUp:
@@ -217,9 +227,9 @@ class Control(BaseControl):
                 radians %= 2*math.pi
                 degrees2 = math.degrees(radians)
 
-        print 'at least this works'
+        
         engine.set_missile_direction(degrees2)
-        print "does it break with this"
+        
 
         if pygame.K_w in keys: #forward
             rotation = (degrees + 0) % 360

@@ -108,6 +108,7 @@ class Display(BaseDisplay):
         self.text_color       = (255, 255, 255)
         self.background_color = (0, 0, 0)
 
+
         # playerStates {'walk':['walk','walkdown','walkleft','walkup','walkright'],'throw':['throw','throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
 
         # filename = os.path.join('display', 'imgs', 'Link Sprites with coordinates.png')
@@ -121,12 +122,30 @@ class Display(BaseDisplay):
             # for d in s:
                 # if len()
                 
+
+        # playerStates {'walk':['walkdown','walkleft','walkup','walkright'],'throw':['throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
+
+        
+        # self.image = pygame.image.load(filename)
+        # self.rect = self.obj_to_rect(obj)
+        # self.image = pygame.image.load(filename)
+        
+        self.chars = []
+        for c in range(len(SPRITESHEETS)):
+            filename = os.path.join('display', 'imgs', SPRITESHEETS[c])
+            sheet = Spritesheet(filename)
+            lines = []
+            for s in range(CHARACTER_STATES):
+                rect = pygame.Rect((s * LINK_SPRITE) + SPRITE_GUTTER,0,LINK_SPRITE,LINK_SPRITE)
+                lines.append(sheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, LINK_STATE[s],))
+            self.chars.append(lines)
+              
+        self.char = self.chars[0]    
+
        
         return
 
-    def load_sprite_line(self):
-        rect = pygame.Rect(LINK_SPRITE[ + 'Y'])
-        self.walkdown = ss.load_irregular_strip(rect, LINK_SPRITE[self.playerState + 'X'] )
+        
 
 
     def paint_pregame(self, surface, control):
@@ -160,8 +179,14 @@ class Display(BaseDisplay):
                 color= COLORS[count]
             count +=1
 
+
             pygame.draw.rect(surface,color,i[0])
             
+
+        # print characters
+        for i in characters:
+            pygame.draw.rect(surface, i[1],i[0])
+
 
         count = 0
         for i in control.arenacharacters:
@@ -177,14 +202,30 @@ class Display(BaseDisplay):
             
 
 
+        # print characters
+        for i in characters:
+            pygame.draw.rect(surface, i[1],i[0])
+
+
+
 
         # for i in control.enemycharacters:
         #     pygame.draw.rect(surface, i[1],i[0])
 
+        # print characters
+        for i in characters:
+            pygame.draw.rect(surface,i[1],i[0])
+
+
         # for i in control.arenacharacters:
         #     pygame.draw.rect(surface,i[1],i[0])
 
+
         
+# print characters
+        for i in characters:
+            pygame.draw.rect(surface, i[1],i[0])
+
         # pygame.draw.rect(surface, (0,255,0), rect1, 0)
         # text message in center of screen
           
@@ -219,8 +260,10 @@ class Display(BaseDisplay):
         Draws the display after the game starts.
         """
         # background
+        # clock = pygame.time.Clock()
         rect = pygame.Rect(0, 0, self.width, self.height)
         surface.fill(self.background_color, rect)
+
             
         # draw each object
         objs = engine.get_objects()
@@ -233,7 +276,29 @@ class Display(BaseDisplay):
             elif obj.is_missile():
                 self.paint_missile(surface, engine, control, obj)
             elif obj.is_player():
-                self.paint_player(surface, engine, control, obj)
+                # tick = pygame.time.get_ticks()
+                # i = 0                
+                # self.paint_player(surface, engine, control, obj, self.char[0][0])
+                # img = self.char[0][0]
+                
+                cycle = len(self.char[0]) * 3
+                step = self.tick(cycle)
+               
+
+                if obj.get_rotation() == 0:
+                    img = self.char[3][self.tick(l, )]
+                    
+                if obj.get_rotation() == 90:
+                    img = self.char[0][self.tick(len(self.char[2]))]
+                    
+                if obj.get_rotation() == 180:
+                    img = self.char[1][self.tick]
+                    
+                if obj.get_rotation() == 270:
+                    img = self.char[2][self.tick(len(self.char[2]))]
+                self.paint_player(surface, engine, control, obj, img)
+
+
             else:
                 print "Unexpected object type: %s" % (str(obj.__class__))
                 
@@ -241,6 +306,16 @@ class Display(BaseDisplay):
         if control.show_info:
             self.paint_game_status(surface, engine, control)
         return
+
+    def tick(self, cycle):
+        
+        step = obj.get_distance()%cycle
+
+        for i in range(2,cycle,3):
+            if step < i:
+                return i/3
+
+
 
         
     def paint_game_over(self, surface, engine, control):
@@ -294,7 +369,7 @@ class Display(BaseDisplay):
             pygame.draw.rect(surface, color, rect)
         return
         
-    def paint_player(self, surface, engine, control, obj):
+    def paint_player(self, surface, engine, control, obj, img):
         """
         Draws living players.
         My player is my opponent are in different colors
@@ -305,10 +380,10 @@ class Display(BaseDisplay):
                 color = self.player_color
             else:
                 color = self.opponent_color
-            pygame.draw.rect(surface, color, rect)
+            surface.blit(img, (obj.get_px(),obj.get_py()))
         return
 
-    def paint_game_status(self, surface, engine, control):
+    def paint_game_status(self, surface, engine, control):  
         """
         This method displays some text in the bottom strip
         of the screen.  You can make it do whatever you want,
@@ -349,7 +424,7 @@ class Display(BaseDisplay):
 class Confetti:
     def __init__(self, limit):
         tile = pygame.Rect(0,0,896,640)
-        print tile
+        # print tile
         decoTemp = []
         self.imgs = [(tile, (111,111,111))]
         
@@ -364,5 +439,5 @@ class Confetti:
     def paint_bg(self, surface):
         
         for i in self.imgs:
-            print i[0]
+            # print i[0]
             pygame.draw.rect(surface, i[1],i[0])
