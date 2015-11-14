@@ -120,19 +120,27 @@ class Display(BaseDisplay):
         # self.logo = pygame.image.load("display\imgs\game pngs '\code camp logo-01")
 
 
-        self.filenames = ["code camp kirby-01.png", "code camp kirby-02.png", "code camp link-01.png", "code camp link-02.png", "code camp mario-01.png","code camp mario-04.png", "code camp mario-02.png","code camp mario-03.png"]
+        self.filenames = ["code camp kirby-01.png", "code camp kirby-02.png", "code camp link-01-01.png", "code camp link-02-01.png", "code camp mario-01.png","code camp mario-04.png", "code camp mario-02.png","code camp mario-03.png"]
         self.imgs = []
 
-        self.filenames2 = []
-        self.background = []
+        self.filename2 = ["code camp castle.png", "forest background code camp-01.png", "haunted house code camp.png"]
+        self.arena = []
 
-        self.filenames2= os.path.join("display", "imgs", b)
-        self.background.append(pygame.image.load, (b))
+        # self.filenames2 = []
+        # self.background = []
+
 
         for f in self.filenames:
             f = os.path.join('display','imgs',f)
             self.imgs.append(pygame.image.load(f))
 
+        for a in self.filename2:
+            a = os.path.join("display","imgs",a)
+            self.arena.append(pygame.image.load(a))
+
+
+        # self.filenames2= os.path.join("display", "imgs", b)
+        # self.background.append(pygame.image.load, (b))
 
 
         # playerStates {'walk':['walk','walkdown','walkleft','walkup','walkright'],'throw':['throw','throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
@@ -171,7 +179,7 @@ class Display(BaseDisplay):
         # background
 
         rect = pygame.Rect(0, 0, self.width, self.height)
-        surface.fill( self.background, rect)
+        surface.fill( (0,155,0), rect)
 
 
 
@@ -234,7 +242,8 @@ class Display(BaseDisplay):
             surface.blit(img,i[0])
             
 
-        
+         
+            
 
 
         count = 0
@@ -247,7 +256,7 @@ class Display(BaseDisplay):
                 color= COLORS[count]
             count +=1
 
-            pygame.draw.rect(surface,color,i[0])
+            surface.blit(self.arena, i[0])
 
         # surface.blit(pygame.image.load('display/imgs/code camp buttons.png'), (0,0))
             

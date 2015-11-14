@@ -100,7 +100,7 @@ class Control(BaseControl):
             self.yourcharacters.append([Rect1.copy(), False, False])
         
         self.enemycharacters =[]
-        Rect2 = pygame.Rect(100, 255, 100, 125)
+        Rect2 = pygame.Rect(50, 255, 100, 125)
         for i in range(config.CHARACTER_NUM):
             Rect2.left += 120
             self.enemycharacters.append([Rect2.copy(), False, False])
@@ -108,7 +108,7 @@ class Control(BaseControl):
 
         self.arenacharacters = []
         Rect3 = pygame.Rect(100, 405, 100, 125)
-        for i in range(config.CHARACTER_NUM):
+        for i in range(3):
             Rect3.left += 120
             self.arenacharacters.append([Rect3.copy(),False, False])
 
