@@ -108,6 +108,21 @@ class Display(BaseDisplay):
         self.text_color       = (255, 255, 255)
         self.background_color = (0, 0, 0)
 
+
+        # playerStates {'walk':['walk','walkdown','walkleft','walkup','walkright'],'throw':['throw','throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
+
+        # filename = os.path.join('display', 'imgs', 'Link Sprites with coordinates.png')
+        # self.image = pygame.image.load(filename)
+        # self.rect = self.obj_to_rect(obj)
+        # self.image = pygame.image.load(filename)
+        # ss = Spritesheet(filename)
+        # for s in playerStates:
+            # if len(s) == 1:
+
+            # for d in s:
+                # if len()
+                
+
         # playerStates {'walk':['walkdown','walkleft','walkup','walkright'],'throw':['throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
 
         
@@ -115,7 +130,17 @@ class Display(BaseDisplay):
         # self.rect = self.obj_to_rect(obj)
         # self.image = pygame.image.load(filename)
         
-           
+        self.chars = []
+        for c in range(len(SPRITESHEETS)):
+            filename = os.path.join('display', 'imgs', SPRITESHEETS[c])
+            sheet = Spritesheet(filename)
+            lines = []
+            for s in range(CHARACTER_STATES):
+                rect = pygame.Rect((s * LINK_SPRITE) + SPRITE_GUTTER,0,LINK_SPRITE,LINK_SPRITE)
+                lines.append(sheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, LINK_STATE[s],))
+            self.chars.append(lines)
+              
+        self.char = self.chars[0]
        
         return
 
@@ -131,48 +156,75 @@ class Display(BaseDisplay):
         surface.fill(self.background_color, rect)
 
 
-        Rect1 = pygame.Rect(100, 100, 100, 125)
+        count = 0
+        for i in control.yourcharacters:
+            if i[1]:
+                color = (255,255,0)
+            elif i[2]:
+                color = (255,255,255)
+            else:
+                color= COLORS[count]
+            count +=1
 
-        characters = []
+            pygame.draw.rect(surface,color,i[0])
 
-        for i in range(CHARACTER_NUM):
-            # color = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
-            Rect1.left += 120
-            characters.append((Rect1.copy(),COLORS[i]))
+        count = 0
+        for i in control.enemycharacters:
+            if i[1]:
+                color = (255,255,0)
+            elif i[2]:
+                color = (255,255,255)
+            else:
+                color= COLORS[count]
+            count +=1
+
+
+            pygame.draw.rect(surface,color,i[0])
+            
 
         # print characters
         for i in characters:
             pygame.draw.rect(surface, i[1],i[0])
 
-        Rect2 = pygame.Rect(100, 255, 100, 125)
-        characters = []
-        for i in range(CHARACTER_NUM):
-            Rect2.left += 120
-            characters.append((Rect2.copy(),COLORS[i]))
+
+        count = 0
+        for i in control.arenacharacters:
+            if i[1]:
+                color = (255,255,0)
+            elif i[2]:
+                color = (255,255,255)
+            else:
+                color= COLORS[count]
+            count +=1
+
+            pygame.draw.rect(surface,color,i[0])
+            
+
 
         # print characters
         for i in characters:
             pygame.draw.rect(surface, i[1],i[0])
 
-        Rect3 = pygame.Rect(100, 405, 100, 125)
-        characters = []
-        for i in range(CHARACTER_NUM):
-            Rect3.left += 120
-            characters.append((Rect3.copy(),COLORS[i]))
+
+
+
+        # for i in control.enemycharacters:
+        #     pygame.draw.rect(surface, i[1],i[0])
 
         # print characters
         for i in characters:
             pygame.draw.rect(surface,i[1],i[0])
 
-        Rect4 = pygame.Rect(100, 560, 100, 50)
-        characters = []
-        for i in range(CHARACTER_NUM):
-            Rect4.left += 120
-            characters.append((Rect4.copy(),COLORS[i]))
 
-        # print characters
+        # for i in control.arenacharacters:
+        #     pygame.draw.rect(surface,i[1],i[0])
+
+
+        
+# print characters
         for i in characters:
             pygame.draw.rect(surface, i[1],i[0])
+
         # pygame.draw.rect(surface, (0,255,0), rect1, 0)
         # text message in center of screen
           
