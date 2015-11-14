@@ -94,14 +94,20 @@ class Control(BaseControl):
         user to press 'd' for dual, 's' for single player game, 't' for tournament.
         """
 
-        if pygame.K_d in newkeys:
-            self.set_state(CONTROL_STATE_WANT_DUAL)
-        elif pygame.K_q in newkeys:
-            self.set_state(CONTROL_STATE_WANT_SINGLE)
-        elif pygame.K_t in newkeys:
-            self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
-        elif pygame.K_v in newkeys:
-            self.set_state(CONTROL_STATE_WANT_VIEW)
+##        if pygame.K_d in newkeys:
+        if pygame.K_1 in newbuttons:
+            if mouse_position == ( , ):
+                self.set_state(CONTROL_STATE_WANT_DUAL)
+##        elif pygame.K_q in newkeys:
+            elif mouse_position == ( , ):
+                self.set_state(CONTROL_STATE_WANT_SINGLE)
+##        elif pygame.K_t in newkeys:
+            elif mouse_position == ( , ):
+                self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+##        elif pygame.K_v in newkeys:
+            elif mouse_position == ( , ):
+                self.set_state(CONTROL_STATE_WANT_VIEW)
+                
         return
         
     def game_input_control(self, engine, keys, newkeys, buttons, newbuttons, mouse_position):
