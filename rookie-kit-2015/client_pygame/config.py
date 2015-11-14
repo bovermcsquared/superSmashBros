@@ -30,8 +30,9 @@ STATUS_BAR_HEIGHT  = 60
 WINDOW_HEIGHT      = FIELD_HEIGHT + STATUS_BAR_HEIGHT
 
 
-LINK_SPRITE = {'walkX':[0,30,60,93,125,158,191,220,252,286,315], 'walkdownY'=0, 'walkleftY': 30, 'walkupY':56, 'walkrightY':85,"throwX":[0,33,63,95,126,159], 'throwdownY':126, 'throwleftY':164, 'throwupY':218, 'throwrightY':244, 'deathX':[0,30,60,96,129,159],"deathY":263, "victoryX":[0,34,66,89], "victoryY":310, "hpX":93, "hpY":310}
+# LINK_SPRITE = {'walkX':[0,30,60,93,125,158,191,220,252,286,315], 'walkdownY'=0, 'walkleftY': 30, 'walkupY':56, 'walkrightY':85,"throwX":[0,33,63,95,126,159], 'throwdownY':126, 'throwleftY':164, 'throwupY':218, 'throwrightY':244, 'deathX':[0,30,60,96,129,159],"deathY":263, "victoryX":[0,34,66,89], "victoryY":310, "hpX":93, "hpY":310}
 
 
 CHARACTER_NUM = 4
-COLORS = [(0,255,0), (0,0,255), (255,0,0), (255,255,0)]
+
+COLORS = [[0,255,0], [0,0,255], [255,0,0], [0,255,255]]

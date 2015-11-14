@@ -5,6 +5,7 @@
 
 import pygame
 import math
+import config
 from client.base_control import *
 
 class Control(BaseControl):
@@ -77,6 +78,35 @@ class Control(BaseControl):
         BaseControl.__init__(self, width, height)
         # used to control display of individual item information
         self.show_info = False
+
+        self.yourcharacters = []
+        Rect1 = pygame.Rect(100, 100, 100, 125)
+
+        for i in range(config.CHARACTER_NUM):
+            # color = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
+            Rect1.left += 120
+            self.yourcharacters.append([Rect1.copy(), False, False])
+            
+
+        # print self.yourcharacters[0][1]
+            
+
+        self.enemycharacters =[]
+        Rect2 = pygame.Rect(100, 255, 100, 125)
+        for i in range(config.CHARACTER_NUM):
+            Rect2.left += 120
+            self.enemycharacters.append([Rect2.copy(), False, False])
+            
+
+        self.arenacharacters = []
+        Rect3 = pygame.Rect(100, 405, 100, 125)
+        for i in range(config.CHARACTER_NUM):
+            Rect3.left += 120
+            self.arenacharacters.append([Rect3.copy(),False, False])
+
+        # self.chars= ['kirby','link','mario','luigi']
+        # self.name = self.chars[(random.randint(0,3)]
+            # 
         return
 
     def pregame_control(self, engine, keys, newkeys, buttons, newbuttons, mouse_position):
@@ -93,21 +123,71 @@ class Control(BaseControl):
         based on the user input.  Defaults here are for the
         user to press 'd' for dual, 's' for single player game, 't' for tournament.
         """
+        # print self.yourcharacters[0][1]
+        for i in self.yourcharacters:
+            print mouse_position, i[0]
+            if mouse_position[0] in range(i[0][0],i[0][0] + i[0][2]) and mouse_position[1] in range(i[0][1],i[0][1] + i[0][3]):
+                if 1 in newbuttons:
+                    #Some character was pressed
+                    for reset in self.yourcharacters:
+                        reset[1]=0
+                    i[1] = [True]
+                i[2] = [True]
+            else:
+                i[2] = False
 
-##        if pygame.K_d in newkeys:
+
+        for i in self.enemycharacters:
+            if mouse_position[0] in range(i[0][0],i[0][0] + i[0][2]) and mouse_position[1] in range(i[0][1],i[0][1] + i[0][3]):
+                if 1 in newbuttons:
+                    for reset in self.enemycharacters:
+                        reset[1] = 0
+                    i[1] = [True]
+                i[2] = [True]
+            else:
+                i[2] = False
+            print 
+
+        for i in self.arenacharacters:
+            if mouse_position[0] in range(i[0][0],i[0][0] + i[0][2]) and mouse_position[1] in range(i[0][1],i[0][1] + i[0][3]):
+                if 1 in newbuttons:
+                    for reset in self.arenacharacters:
+                        reset[1] = 0
+                    i[1] = [True]
+                i[2] = [True]
+            else:
+                i[2] = False
+
+            print i[1], i[2]
+        
+            
+            # if 1 in newbuttons:
+
         if 1 in newbuttons:
             if mouse_position[0] in range(340, 556):
                 if mouse_position[1] in range(39, 147):
                     self.set_state(CONTROL_STATE_WANT_DUAL)
-##        elif pygame.K_q in newkeys:
                 elif mouse_position == (187, 295):
                     self.set_state(CONTROL_STATE_WANT_SINGLE)
-##        elif pygame.K_t in newkeys:
                 elif mouse_position == (335, 443):
                     self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
-##        elif pygame.K_v in newkeys:
                 elif mouse_position == (483, 591):
                     self.set_state(CONTROL_STATE_WANT_VIEW)
+        # elif buttonUp:
+            # characters[0][1] = COLORS[0]
+##        if pygame.K_d in newkeys:
+        # if pygame.K_1 in newbuttons:
+            # if mouse_position == ( , ):
+                # self.set_state(CONTROL_STATE_WANT_DUAL)
+##        elif pygame.K_q in newkeys:
+            # elif mouse_position == ( , ):
+                # self.set_state(CONTROL_STATE_WANT_SINGLE)
+##        elif pygame.K_t in newkeys:
+            # elif mouse_position == ( , ):
+                # self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+##        elif pygame.K_v in newkeys:
+            # elif mouse_position == ( , ):
+                # self.set_state(CONTROL_STATE_WANT_VIEW)
                 
         return
         
@@ -210,6 +290,8 @@ class Control(BaseControl):
         """
 
         return
+
+    
 
     
 
