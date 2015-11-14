@@ -94,20 +94,23 @@ class Control(BaseControl):
         user to press 'd' for dual, 's' for single player game, 't' for tournament.
         """
 
-##        if pygame.K_d in newkeys:
-        if 1 in newbuttons:
-            if mouse_position[0] in range(340, 556):
-                if mouse_position[1] in range(39, 147):
-                    self.set_state(CONTROL_STATE_WANT_DUAL)
-##        elif pygame.K_q in newkeys:
-                elif mouse_position == (187, 295):
-                    self.set_state(CONTROL_STATE_WANT_SINGLE)
-##        elif pygame.K_t in newkeys:
-                elif mouse_position == (335, 443):
-                    self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
-##        elif pygame.K_v in newkeys:
-                elif mouse_position == (483, 591):
-                    self.set_state(CONTROL_STATE_WANT_VIEW)
+        if pygame.K_d in newkeys:
+            self.set_state(CONTROL_STATE_WANT_DUAL)
+        # if 1 in newbuttons:
+            # if mouse_position[0] in range(340, 556):
+            #     if mouse_position[1] in range(39, 147):
+            #         self.set_state(CONTROL_STATE_WANT_DUAL)
+        elif pygame.K_q in newkeys:
+            self.set_state(CONTROL_STATE_WANT_SINGLE)
+                # elif mouse_position == (187, 295):
+                #     self.set_state(CONTROL_STATE_WANT_SINGLE)
+        ## elif pygame.K_t in newkeys:
+                # elif mouse_position == (335, 443):
+                #     self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+        elif pygame.K_v in newkeys:
+            self.set_state(CONTROL_STATE_WANT_VIEW)
+                # elif mouse_position == (483, 591):
+                #     self.set_state(CONTROL_STATE_WANT_VIEW)
                 
         return
         
