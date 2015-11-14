@@ -7,6 +7,8 @@ import pygame
 import math
 import config
 from client.base_control import *
+
+from config import *
 from character import *
 
 
@@ -26,7 +28,7 @@ class Control(BaseControl):
         you need to remember here and in the display class.
     pregame_control is used to get user input before you join 
         a game.  This is most important in deciding what kind 
-        of game the user would like to join.
+        of game the user would like to join.s
     game_input_control is used to get user input during a running
         game.  This is most important in allowing the user to
         tell your code what they would like to have happen.
@@ -81,6 +83,13 @@ class Control(BaseControl):
         # used to control display of individual item information
         self.show_info = False
 
+        self.mario_sounds = ['mariothrow.wav', 'mariovictory.wav', 'mariodeath.wav']
+        self.luigi_sounds = ['luigithrow.wav', 'luigivictory.wav', 'luigideath.wav']
+        self.link_sounds = ['linkthrust.wav', 'linkvictory.wav', 'linkdeath.wav']
+        self.kirby_sounds = ['Kirbythrow.wav', 'kirbyvictory.wav', 'kirbydeath.wav']
+        self.Link = Character('link', self.link_sounds, SPRITESHEETS[0], CHAR_STATE['link'])
+        self.char = self.Link
+
         self.yourcharacters = []
         Rect1 = pygame.Rect(100, 100, 100, 125)
 
@@ -111,6 +120,7 @@ class Control(BaseControl):
         # 
 
         self.Link = Character
+
 
         return
 
