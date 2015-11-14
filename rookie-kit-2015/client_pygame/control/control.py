@@ -81,6 +81,15 @@ class Control(BaseControl):
         # used to control display of individual item information
         self.show_info = False
 
+
+        self.mario_sounds = ['mariothrow.wav', 'mariovictory.wav', 'mariodeath.wav']
+        self.luigi_sounds = ['luigithrow.wav', 'luigivictory.wav', 'luigideath.wav']
+        self.link_sounds = ['linkthrust.wav', 'linkvictory.wav', 'linkdeath.wav']
+        self.kirby_sounds = ['Kirbythrow.wav', 'kirbyvictory.wav', 'kirbydeath.wav']
+
+        self.link = Character('link', self.link_sounds, SPRITESHEETS[0], CHAR_STATE['link'])
+        self.char = self.link
+
         self.yourcharacters = []
         Rect1 = pygame.Rect(50, 100, 100, 125)
 
@@ -102,11 +111,19 @@ class Control(BaseControl):
             Rect3.left += 120
             self.arenacharacters.append([Rect3.copy(),False, False])
 
+        self.charSelected = False
+        self.foeSelected = False
+        self.arenaSelected = False
+
         # self.chars= ['kirby','link','mario','luigi']
         # self.name = self.chars[(random.randint(0,3)]
         # 
 
-        self.Link = Character
+        self.tourneyR = pygame.Rect(5,579,200,97)
+        self.singleR = pygame.Rect(225,579,200,97)
+        self.dualR = pygame.Rect(445,579,200,97)
+        self.demoR = pygame.Rect(665,579,200,97)
+        self. buttons  =[(pygame.Rect(5,579,200,97),'CONTROL_STATE_WANT_TOURNAMENT'),(pygame.Rect(225,579,200,97),'CONTROL_STATE_WANT_SINGLE'),(pygame.Rect(445,579,200,97),'CONTROL_STATE_WANT_TOURNAMENT'),(pygame.Rect(665,579,200,97),'CONTROL_STATE_WANT_VIEW')]
 
         return
 
@@ -133,6 +150,7 @@ class Control(BaseControl):
                     for reset in self.yourcharacters:
                         reset[1]=0
                     i[1] = [True]
+                    self.charSelected = True
                 i[2] = [True]
             else:
                 i[2] = False
@@ -144,7 +162,9 @@ class Control(BaseControl):
                     for reset in self.enemycharacters:
                         reset[1] = 0
                     i[1] = [True]
+                    self.foeSelected = True
                 i[2] = [True]
+
             else:
                 i[2] = False
             print 
@@ -155,6 +175,7 @@ class Control(BaseControl):
                     for reset in self.arenacharacters:
                         reset[1] = 0
                     i[1] = [True]
+                    self.arenaSelected = True
                 i[2] = [True]
             else:
                 i[2] = False
@@ -166,25 +187,29 @@ class Control(BaseControl):
 
 
         if 1 in newbuttons:
-            if mouse_position[0] in range(340, 556):
-                if mouse_position[1] in range(39, 147):
+            for b in self.buttons:
+                if b[0].collidepoint(mouse_position):
+                    eval("self.set_state("+b[1]+')')
 
-                    self.set_state(CONTROL_STATE_WANT_DUAL)
+#             if mouse_position[0] in range(340, 556):
+#                 if mouse_position[1] in range(39, 147):
 
-                    self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
-##        elif pygame.K_q in newkeys:
+#                     # self.set_state(CONTROL_STATE_WANT_DUAL)
 
-                elif mouse_position == (187, 295):
-                    self.set_state(CONTROL_STATE_WANT_SINGLE)
-                elif mouse_position == (335, 443):
+#                     self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+# ##        elif pygame.K_q in newkeys:
 
-                    self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
+#                 elif mouse_position == (187, 295):
+#                     self.set_state(CONTROL_STATE_WANT_SINGLE)
+#                 elif mouse_position == (335, 443):
 
-                    self.set_state(CONTROL_STATE_WANT_DUAL)
-##        elif pygame.K_v in newkeys:
+#                     # self.set_state(CONTROL_STATE_WANT_TOURNAMENT)
 
-                elif mouse_position == (483, 591):
-                    self.set_state(CONTROL_STATE_WANT_VIEW)
+#                     self.set_state(CONTROL_STATE_WANT_DUAL)
+# ##        elif pygame.K_v in newkeys:
+
+#                 elif mouse_position == (483, 591):
+#                     self.set_state(CONTROL_STATE_WANT_VIEW)
         # elif buttonUp:
             # characters[0][1] = COLORS[0]
 ##        if pygame.K_d in newkeys:
@@ -210,7 +235,7 @@ class Control(BaseControl):
         to make changes to the game engine based on the
         user input.
         """
-        
+        # print CHAR_STATE['link']
         (mouse_x, mouse_y) = mouse_position
         degrees = 270
 

@@ -7,6 +7,7 @@ import pygame
 from config import *
 from common.event import *
 from client.base_display import BaseDisplay
+from spritesheet import Spritesheet
 import random
 import os
 
@@ -107,6 +108,17 @@ class Display(BaseDisplay):
         self.wall_color       = (255, 255, 255)
         self.text_color       = (255, 255, 255)
         self.background_color = (0, 0, 0)
+        buttonF = 'code camp buttons.png'
+        sheet = Spritesheet(buttonF)
+
+        
+        self.tourneyB = sheet.image_at(pygame.Rect(5,5,200,97),(255,255,255))
+        self.singleB = sheet.image_at(pygame.Rect(5,134,200,97),(255,255,255))
+        self.dualB = sheet.image_at(pygame.Rect(5,264,200,97),(255,255,255))
+        self.demoB = sheet.image_at(pygame.Rect(5,394,200,97),(255,255,255))
+
+        self.logo = pygame.image.load("display\imgs\game pngs '\code camp logo-01")
+
 
         self.filenames = ["code camp kirby-01.png", "code camp kirby-02.png", "code camp link-01.png", "code camp link-02.png", "code camp mario-01.png","code camp mario-04.png", "code camp mario-02.png","code camp mario-03.png"]
         self.imgs = []
@@ -236,23 +248,29 @@ class Display(BaseDisplay):
             count +=1
 
             pygame.draw.rect(surface,color,i[0])
+
+        # surface.blit(pygame.image.load('display/imgs/code camp buttons.png'), (0,0))
             
 
-
+        if control.arenaSelected and control.charSelected and control.foeSelected:
+            surface.blit(self.tourneyB,control.tourneyR)
+            surface.blit(self.singleB,control.singleR)
+            surface.blit(self.dualB,control.dualR)
+            surface.blit(self.demoB,control.demoR)
 
         
 
         # pygame.draw.rect(surface, (0,255,0), rect1, 0)
         # text message in center of screen
           
-        s = "Press 'd' for dual player, 'q' for single player,"
-        self.draw_text_center(surface, s, self.text_color,
-                              self.width/2, self.height/2,
-                              self.font)
-        s = "'t' for tournament, 'esc' to quit."
-        self.draw_text_center(surface, s, self.text_color,
-                              self.width/2, self.height/2 + 3*self.font_size/2,
-                              self.font)
+        # s = "Press 'd' for dual player, 'q' for single player,"
+        # self.draw_text_center(surface, s, self.text_color,
+        #                       self.width/2, self.height/2,
+        #                       self.font)
+        # s = "'t' for tournament, 'esc' to quit."
+        # self.draw_text_center(surface, s, self.text_color,
+        #                       self.width/2, self.height/2 + 3*self.font_size/2,
+        #                       self.font)
         return
         
     def paint_waiting_for_game(self, surface, engine, control):
@@ -264,6 +282,7 @@ class Display(BaseDisplay):
         # background
         rect = pygame.Rect(0, 0, self.width, self.height)
         surface.fill(self.background_color, rect)
+        surface.blit(logo, (0,0))
         # text message in center of screen
         s = "Waiting for opponent to connect."
         self.draw_text_center(surface, s, self.text_color,
@@ -275,7 +294,7 @@ class Display(BaseDisplay):
         """
         Draws the display after the game starts.
         """
-        print "went to paint"
+        # print "went to paint"
         # background
         # clock = pygame.time.Clock()
         rect = pygame.Rect(0, 0, self.width, self.height)
@@ -297,10 +316,11 @@ class Display(BaseDisplay):
                 # i = 0                
                 # self.paint_player(surface, engine, control, obj, self.char[0][0])
                 # img = self.char[0][0]
-                
-                cycle = len(self.char[0]) * CHAR_SPEED
+                print control.char.get_row(0)
+                cycle = control.char.get_row(0) * CHAR_SPEED
+                print cycle
                 step = self.tick(obj,cycle)
-                img = control.char.find_sprite_directions(obj.get_rotation(), step)
+                img = control.char.find_sprite_direction(obj.get_rotation(), step)
 
                 width = obj.get_pw()
                 height = obj.get_ph()
