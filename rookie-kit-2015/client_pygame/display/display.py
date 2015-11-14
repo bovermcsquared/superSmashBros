@@ -117,7 +117,7 @@ class Display(BaseDisplay):
         self.dualB = sheet.image_at(pygame.Rect(5,264,200,97),(255,255,255))
         self.demoB = sheet.image_at(pygame.Rect(5,394,200,97),(255,255,255))
 
-        self.logo = pygame.image.load("display\imgs\game pngs '\code camp logo-01")
+        # self.logo = pygame.image.load("display\imgs\game pngs '\code camp logo-01")
 
 
 
@@ -233,7 +233,7 @@ class Display(BaseDisplay):
         # background
         rect = pygame.Rect(0, 0, self.width, self.height)
         surface.fill(self.background_color, rect)
-        surface.blit(logo, (0,0))
+        # surface.blit(self.logo, (0,0))
         # text message in center of screen
         s = "Waiting for opponent to connect."
         self.draw_text_center(surface, s, self.text_color,
@@ -267,9 +267,9 @@ class Display(BaseDisplay):
                 # i = 0                
                 # self.paint_player(surface, engine, control, obj, self.char[0][0])
                 # img = self.char[0][0]
-                print control.char.get_row(0)
+                # print control.char.get_row(0)
                 cycle = control.char.get_row(0) * CHAR_SPEED
-                print cycle
+                # print cycle
                 step = self.tick(obj,cycle)
                 img = control.char.find_sprite_direction(obj.get_rotation(), step)
 
@@ -289,8 +289,8 @@ class Display(BaseDisplay):
 
     def tick(self, obj, cycle):
         
-        step = int((obj.get_distance()%cycle)/5)
-        print "step",step
+        step = int((obj.get_distance()%cycle)/6)
+        # print "step",step
 
         return step
 

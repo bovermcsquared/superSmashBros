@@ -90,6 +90,7 @@ class Control(BaseControl):
 
         self.link = Character('link', self.link_sounds, SPRITESHEETS[0], CHAR_STATE['link'])
         self.char = self.link
+        
 
         self.yourcharacters = []
         Rect1 = pygame.Rect(100, 100, 100, 125)
@@ -149,7 +150,7 @@ class Control(BaseControl):
         """
         # print self.yourcharacters[0][1]
         for i in self.yourcharacters:
-            print mouse_position, i[0]
+            # print mouse_position, i[0]
             if mouse_position[0] in range(i[0][0],i[0][0] + i[0][2]) and mouse_position[1] in range(i[0][1],i[0][1] + i[0][3]):
                 if 1 in newbuttons:
                     #Some character was pressed
@@ -173,7 +174,7 @@ class Control(BaseControl):
 
             else:
                 i[2] = False
-            print 
+             
 
         for i in self.arenacharacters:
             if mouse_position[0] in range(i[0][0],i[0][0] + i[0][2]) and mouse_position[1] in range(i[0][1],i[0][1] + i[0][3]):
@@ -186,7 +187,7 @@ class Control(BaseControl):
             else:
                 i[2] = False
 
-            print i[1], i[2]
+            # print i[1], i[2]
         
             
             # if 1 in newbuttons:
