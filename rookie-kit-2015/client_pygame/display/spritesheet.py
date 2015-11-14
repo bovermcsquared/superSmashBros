@@ -30,9 +30,9 @@ class Spritesheet:
     #             for x in range(image_count)]
     #     return self.images_at(tups, colorkey)
 
-    def load_irregular_strip(self, rect, xpos, colorkey = None):
+    def load_irregular_strip(self, rect, imageWidth, l, colorkey = None):
         tups = []
-        for x in range(len(xpos)):
-            tups.append((xpos[x], rect[1],rect[2],rect[3])) 
+        for x in range(l):
+            tups.append((rect[0] + imageWidth*x, rect[1],rect[2],rect[3])) 
             
         return self.images_at(tups, colorkey)

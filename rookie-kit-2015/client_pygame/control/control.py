@@ -137,9 +137,9 @@ class Control(BaseControl):
                 radians %= 2*math.pi
                 degrees2 = math.degrees(radians)
 
-        print 'at least this works'
+        # print 'at least this works'
         engine.set_missile_direction(degrees2)
-        print "does it break with this"
+        # print "does it break with this"
 
         if pygame.K_w in keys: #forward
             rotation = (degrees + 0) % 360
