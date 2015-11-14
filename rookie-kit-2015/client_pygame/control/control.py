@@ -7,8 +7,6 @@ import pygame
 import math
 import config
 from client.base_control import *
-
-from config import *
 from character import *
 
 
@@ -28,7 +26,7 @@ class Control(BaseControl):
         you need to remember here and in the display class.
     pregame_control is used to get user input before you join 
         a game.  This is most important in deciding what kind 
-        of game the user would like to join.s
+        of game the user would like to join.
     game_input_control is used to get user input during a running
         game.  This is most important in allowing the user to
         tell your code what they would like to have happen.
@@ -83,25 +81,14 @@ class Control(BaseControl):
         # used to control display of individual item information
         self.show_info = False
 
-        self.mario_sounds = ['mariothrow.wav', 'mariovictory.wav', 'mariodeath.wav']
-        self.luigi_sounds = ['luigithrow.wav', 'luigivictory.wav', 'luigideath.wav']
-        self.link_sounds = ['linkthrust.wav', 'linkvictory.wav', 'linkdeath.wav']
-        self.kirby_sounds = ['Kirbythrow.wav', 'kirbyvictory.wav', 'kirbydeath.wav']
-        self.Link = Character('link', self.link_sounds, SPRITESHEETS[0], CHAR_STATE['link'])
-        self.char = self.Link
-
         self.yourcharacters = []
-        Rect1 = pygame.Rect(100, 100, 100, 125)
+        Rect1 = pygame.Rect(50, 100, 100, 125)
 
         for i in range(config.CHARACTER_NUM):
             # color = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
             Rect1.left += 120
             self.yourcharacters.append([Rect1.copy(), False, False])
-            
-
-        # print self.yourcharacters[0][1]
-            
-
+        
         self.enemycharacters =[]
         Rect2 = pygame.Rect(100, 255, 100, 125)
         for i in range(config.CHARACTER_NUM):
@@ -120,7 +107,6 @@ class Control(BaseControl):
         # 
 
         self.Link = Character
-
 
         return
 

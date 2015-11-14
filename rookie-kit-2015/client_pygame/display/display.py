@@ -108,6 +108,20 @@ class Display(BaseDisplay):
         self.text_color       = (255, 255, 255)
         self.background_color = (0, 0, 0)
 
+        self.filenames = ["code camp kirby-01.png", "code camp kirby-02.png", "code camp link-01.png", "code camp link-02.png", "code camp mario-01.png","code camp mario-04.png", "code camp mario-02.png","code camp mario-03.png"]
+        self.imgs = []
+
+        self.filenames2 = []
+        self.background = []
+
+        self.filenames2= os.path.join("display", "imgs", b)
+        self.background.append(pygame.image.load, (b))
+
+        for f in self.filenames:
+            f = os.path.join('display','imgs',f)
+            self.imgs.append(pygame.image.load(f))
+
+
 
         # playerStates {'walk':['walk','walkdown','walkleft','walkup','walkright'],'throw':['throw','throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
 
@@ -143,34 +157,69 @@ class Display(BaseDisplay):
         Draws the display before the user selects the game type.
         """
         # background
+
         rect = pygame.Rect(0, 0, self.width, self.height)
-        surface.fill(self.background_color, rect)
+        surface.fill(, rect)
+
 
 
         count = 0
+        x = 0
         for i in control.yourcharacters:
             if i[1]:
                 color = (255,255,0)
+                time = pygame.time.get_ticks()
+                print time
+                time = time%500
+                if time <250:
+                    img = self.imgs[x]
+
+                else:
+                    img = self.imgs[x + 1]
             elif i[2]:
                 color = (255,255,255)
+                time = pygame.time.get_ticks()
+                time = time%500
+                if time <250:
+                    img = self.imgs[x]
+                else:
+                    img = self.imgs[x + 1]
             else:
                 color= COLORS[count]
+                img = self.imgs[x]
             count +=1
-
-            pygame.draw.rect(surface,color,i[0])
+            x += 2           
+            surface.blit(img,i[0])
+            
 
         count = 0
+        x = 0
         for i in control.enemycharacters:
             if i[1]:
                 color = (255,255,0)
+                time = pygame.time.get_ticks()
+                print time
+                time = time%500
+                if time <250:
+                    img = self.imgs[x]
+
+                else:
+                    img = self.imgs[x + 1]
             elif i[2]:
                 color = (255,255,255)
+                time = pygame.time.get_ticks()
+                time = time%500
+                if time <250:
+                    img = self.imgs[x]
+                else:
+                    img = self.imgs[x + 1]
             else:
                 color= COLORS[count]
+                img = self.imgs[x]
             count +=1
-
-
-            pygame.draw.rect(surface,color,i[0])
+            x += 2
+                       
+            surface.blit(img,i[0])
             
 
         

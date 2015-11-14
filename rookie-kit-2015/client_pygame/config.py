@@ -29,6 +29,8 @@ STATUS_BAR_HEIGHT  = 60
 # How tall the window is.  This doesn't change the height of the game.
 WINDOW_HEIGHT      = FIELD_HEIGHT + STATUS_BAR_HEIGHT
 
+# START_UP_PICS = [["code camp kirby-01.png", "code camp kirby-02"], ["code camp link-01", "code camp link-02"], ["code camp mario-01","code camp mario-04"], ["code camp mario-02","code camp mario-03"]
+
 SPRITESHEETS = ['Link spritesheet.png', 'Kirby spritesheet.png']
 LINK_SPRITE = 30
 SPRITE_GUTTER = 5
