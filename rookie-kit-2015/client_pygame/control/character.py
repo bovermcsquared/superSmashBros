@@ -12,30 +12,40 @@ class Character:
 		self.rowL = rowLength
 		self.spritesheet = Spritesheet(filename)
 		self.load_sprites()
+		print"thishas happened"
 		
 		
 
 
 	def load_sprites(self):
 		self.lines = []
-		for s in self.rowL:
+		print self.rowL
+		print len(self.rowL)
+		# for s in range(len(self.rowL)):
+		for s in range(10):
 			rect = pygame.Rect((0,s*(SPRITE_GUTTER+LINK_SPRITE),LINK_SPRITE,LINK_SPRITE))
-	        self.lines.append(self.spritesheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, CHAR_STATE[self.name][s], (255,255,255)))
+			print rect
+	        self.lines.append(self.spritesheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, self.rowL[s], (255,255,255)))
 
 	def find_sprite_direction(self, rot, step):
+		print self.lines
 		if rot >=325 or rot< 45:
-			img = self.char[3][step]
+			img = self.lines[0][step]
 # else:
 #     img = self.char[3][0]
 		if rot >=45 and rot <135:
-			img = self.char[0][step]
+			img = self.lines[0][step]
 
 		if rot >= 135 and rot <225:
-			img = self.char[1][step]
+			img = self.lines[0][step]
 
 		if rot >= 225 and rot<325:
-			img = self.char[2][step]
+			img = self.lines[0][step]
 		return img
+
+	def get_row(self, row):
+		print "row has been gotten"
+		return self.rowL[row]
 
 	def load_sounds(self):
 		for i in self.sounds:
