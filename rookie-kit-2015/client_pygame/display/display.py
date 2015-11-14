@@ -171,7 +171,7 @@ class Display(BaseDisplay):
         # background
 
         rect = pygame.Rect(0, 0, self.width, self.height)
-        surface.fill(, rect)
+        surface.fill( self.background, rect)
 
 
 
