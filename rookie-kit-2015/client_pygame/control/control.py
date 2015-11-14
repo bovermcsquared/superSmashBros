@@ -107,7 +107,7 @@ class Control(BaseControl):
             
 
         self.arenacharacters = []
-        Rect3 = pygame.Rect(100, 405, 100, 125)
+        Rect3 = pygame.Rect(180, 420, 100, 125)
         for i in range(3):
             Rect3.left += 120
             self.arenacharacters.append([Rect3.copy(),False, False])
