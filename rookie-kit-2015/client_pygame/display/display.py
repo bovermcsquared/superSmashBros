@@ -130,17 +130,8 @@ class Display(BaseDisplay):
         # self.rect = self.obj_to_rect(obj)
         # self.image = pygame.image.load(filename)
         
-        self.chars = []
-        for c in range(len(SPRITESHEETS)):
-            filename = os.path.join('display', 'imgs', SPRITESHEETS[c])
-            sheet = Spritesheet(filename)
-            lines = []
-            for s in range(CHARACTER_STATES):
-                rect = pygame.Rect((s * LINK_SPRITE) + SPRITE_GUTTER,0,LINK_SPRITE,LINK_SPRITE)
-                lines.append(sheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, LINK_STATE[s],))
-            self.chars.append(lines)
-              
-        self.char = self.chars[0]
+
+        
        
         return
 
@@ -182,9 +173,7 @@ class Display(BaseDisplay):
             pygame.draw.rect(surface,color,i[0])
             
 
-        # print characters
-        for i in characters:
-            pygame.draw.rect(surface, i[1],i[0])
+        
 
 
         count = 0
@@ -201,29 +190,8 @@ class Display(BaseDisplay):
             
 
 
-        # print characters
-        for i in characters:
-            pygame.draw.rect(surface, i[1],i[0])
-
-
-
-
-        # for i in control.enemycharacters:
-        #     pygame.draw.rect(surface, i[1],i[0])
-
-        # print characters
-        for i in characters:
-            pygame.draw.rect(surface,i[1],i[0])
-
-
-        # for i in control.arenacharacters:
-        #     pygame.draw.rect(surface,i[1],i[0])
-
 
         
-# print characters
-        for i in characters:
-            pygame.draw.rect(surface, i[1],i[0])
 
         # pygame.draw.rect(surface, (0,255,0), rect1, 0)
         # text message in center of screen
