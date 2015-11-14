@@ -115,17 +115,7 @@ class Display(BaseDisplay):
         # self.rect = self.obj_to_rect(obj)
         # self.image = pygame.image.load(filename)
         
-        self.chars = []
-        for c in range(len(SPRITESHEETS)):
-            filename = os.path.join('display', 'imgs', SPRITESHEETS[c])
-            sheet = Spritesheet(filename)
-            lines = []
-            for s in :
-                rect = pygame.Rect((0,s*(SPRITE_GUTTER+LINK_SPRITE),LINK_SPRITE,LINK_SPRITE))
-                lines.append(sheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, LINK_STATE[s], (255,255,255)))
-            self.chars.append(lines)
-              
-        self.char = self.chars[0]    
+           
        
         return
 

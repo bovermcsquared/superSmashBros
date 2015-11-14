@@ -6,6 +6,8 @@
 import pygame
 import math
 from client.base_control import *
+from character import *
+
 
 class Control(BaseControl):
     """
@@ -77,6 +79,8 @@ class Control(BaseControl):
         BaseControl.__init__(self, width, height)
         # used to control display of individual item information
         self.show_info = False
+
+        self.Link = Character
         return
 
     def pregame_control(self, engine, keys, newkeys, buttons, newbuttons, mouse_position):
@@ -94,8 +98,7 @@ class Control(BaseControl):
         user to press 'd' for dual, 's' for single player game, 't' for tournament.
         """
 
-<<<<<<< 
-=======
+
 ##        if pygame.K_d in newkeys:
         if 1 in newbuttons:
             if mouse_position[0] in range(340, 556):
@@ -110,7 +113,6 @@ class Control(BaseControl):
 ##        elif pygame.K_v in newkeys:
                 elif mouse_position == (483, 591):
                     self.set_state(CONTROL_STATE_WANT_VIEW)
->>>>>>> origin/master
                 
         return
         
