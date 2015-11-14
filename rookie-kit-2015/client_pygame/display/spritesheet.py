@@ -1,7 +1,10 @@
 import pygame
+import os
 
 class Spritesheet:
     def __init__(self, filename):
+        
+        filename = os.path.join('display','imgs',filename)
         try:
             self.sheet = pygame.image.load(filename).convert_alpha()
         except pygame.error, message:

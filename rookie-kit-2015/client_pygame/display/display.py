@@ -9,7 +9,7 @@ from common.event import *
 from client.base_display import BaseDisplay
 import random
 import os
-from spritesheet import Spritesheet
+
 
 class Display(BaseDisplay):
     """
@@ -229,22 +229,9 @@ class Display(BaseDisplay):
                 # self.paint_player(surface, engine, control, obj, self.char[0][0])
                 # img = self.char[0][0]
                 
-                cycle = len(self.char[0]) * 5
+                cycle = len(self.char[0]) * CHAR_SPEED
                 step = self.tick(obj,cycle)
-                print obj.get_rotation()
-
-                if obj.get_rotation() >=325 or obj.get_rotation()< 45:
-                    img = self.char[3][step]
-                # else:
-                #     img = self.char[3][0]
-                if obj.get_rotation() >=45 and obj.get_rotation() <135:
-                    img = self.char[0][step]
-                    
-                if obj.get_rotation() >= 135 and obj.get_rotation() <225:
-                    img = self.char[1][step]
-                    
-                if obj.get_rotation() >= 225 and obj.get_rotation()<325:
-                    img = self.char[2][step]
+                img = control.char.find_sprite_directions(obj.get_rotation(), step)
 
                 width = obj.get_pw()
                 height = obj.get_ph()
@@ -266,6 +253,8 @@ class Display(BaseDisplay):
         print "step",step
 
         return step
+
+    
             
 
 
