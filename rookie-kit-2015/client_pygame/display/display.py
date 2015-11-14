@@ -8,6 +8,8 @@ from config import *
 from common.event import *
 from client.base_display import BaseDisplay
 import random
+import os
+from spritesheet import Spritesheet
 
 class Display(BaseDisplay):
     """
@@ -105,8 +107,27 @@ class Display(BaseDisplay):
         self.wall_color       = (255, 255, 255)
         self.text_color       = (255, 255, 255)
         self.background_color = (0, 0, 0)
+
+        playerStates {'walk':['walk','walkdown','walkleft','walkup','walkright'],'throw':['throw','throwdown','throwleft','throwup','throwright'], 'death':['death'],'victory':['victory'],'hp':['victory']}
+
+        filename = os.path.join('display', 'imgs', 'Link Sprites with coordinates.png')
+        # self.image = pygame.image.load(filename)
+        # self.rect = self.obj_to_rect(obj)
+        # self.image = pygame.image.load(filename)
+        ss = Spritesheet(filename)
+        for s in playerStates:
+            if len(s) == 1:
+
+            for d in s:
+                if len()
+                
        
         return
+
+    def load_sprite_line(self):
+        rect = pygame.Rect(LINK_SPRITE[ + 'Y'])
+        self.walkdown = ss.load_irregular_strip(rect, LINK_SPRITE[self.playerState + 'X'] )
+
 
     def paint_pregame(self, surface, control):
         """
