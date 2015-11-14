@@ -7,9 +7,9 @@ from engine_server.config import *
 # values, unless you are sure you know what you are doing.
 
 # Configure this to put a title in the top of your window
-DEFAULT_GAME_TITLE = "We didn't set our game title yet"
+DEFAULT_GAME_TITLE = "Super Smash Bros 9 3/4"
 # Configure this to use your name during games with others
-DEFAULT_TEAM_NAME  = "We didn't set our team name yet"
+DEFAULT_TEAM_NAME  = "Choboco Knights"
 
 # This is the number of times to check for input and redraw
 # the screen every second.  If your computer is slow, then
@@ -29,20 +29,11 @@ STATUS_BAR_HEIGHT  = 60
 # How tall the window is.  This doesn't change the height of the game.
 WINDOW_HEIGHT      = FIELD_HEIGHT + STATUS_BAR_HEIGHT
 
-
-# LINK_SPRITE = {'walkX':[0,30,60,93,125,158,191,220,252,286,315], 'walkdownY'=0, 'walkleftY': 30, 'walkupY':56, 'walkrightY':85,"throwX":[0,33,63,95,126,159], 'throwdownY':126, 'throwleftY':164, 'throwupY':218, 'throwrightY':244, 'deathX':[0,30,60,96,129,159],"deathY":263, "victoryX":[0,34,66,89], "victoryY":310, "hpX":93, "hpY":310}
-
+SPRITESHEETS = ['Link spritesheet.png', 'Kirby spritesheet.png']
+LINK_SPRITE = 30
+SPRITE_GUTTER = 5
 
 CHARACTER_NUM = 4
-
+CHARACTER_STATES = 10
+CHAR_STATE = {'link': [10,10,10,10,6,6,6,6,5,3], 'kirby': [8,10,8,6,6,6,6,8]}
 COLORS = [[0,255,0], [0,0,255], [255,0,0], [0,255,255]]
-
-# SPRITESHEETS = ['Link Sprites with coordinates.png']
-# LINK_SPRITE = 33
-# SPRITE_GUTTER = 5
-
-# CHARACTER_NUM = 4
-# CHARACTER_STATES = 11
-# LINK_STATE = [10,10,10,10,6,6,6,6,5,3,1]
-# COLORS = [(0,255,0), (0,0,255), (255,0,0), (255,255,0)]
-# >>>>>>> origin/master

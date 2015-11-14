@@ -140,8 +140,7 @@ class Display(BaseDisplay):
                 lines.append(sheet.load_irregular_strip(rect,LINK_SPRITE+SPRITE_GUTTER, LINK_STATE[s],))
             self.chars.append(lines)
               
-        self.char = self.chars[0]    
-
+        self.char = self.chars[0]
        
         return
 
@@ -259,6 +258,7 @@ class Display(BaseDisplay):
         """
         Draws the display after the game starts.
         """
+        print "went to paint"
         # background
         # clock = pygame.time.Clock()
         rect = pygame.Rect(0, 0, self.width, self.height)
@@ -281,21 +281,26 @@ class Display(BaseDisplay):
                 # self.paint_player(surface, engine, control, obj, self.char[0][0])
                 # img = self.char[0][0]
                 
-                cycle = len(self.char[0]) * 3
-                step = self.tick(cycle)
-               
+                cycle = len(self.char[0]) * 5
+                step = self.tick(obj,cycle)
+                print obj.get_rotation()
 
-                if obj.get_rotation() == 0:
-                    img = self.char[3][self.tick(l, )]
+                if obj.get_rotation() >=325 or obj.get_rotation()< 45:
+                    img = self.char[3][step]
+                # else:
+                #     img = self.char[3][0]
+                if obj.get_rotation() >=45 and obj.get_rotation() <135:
+                    img = self.char[0][step]
                     
-                if obj.get_rotation() == 90:
-                    img = self.char[0][self.tick(len(self.char[2]))]
+                if obj.get_rotation() >= 135 and obj.get_rotation() <225:
+                    img = self.char[1][step]
                     
-                if obj.get_rotation() == 180:
-                    img = self.char[1][self.tick]
-                    
-                if obj.get_rotation() == 270:
-                    img = self.char[2][self.tick(len(self.char[2]))]
+                if obj.get_rotation() >= 225 and obj.get_rotation()<325:
+                    img = self.char[2][step]
+
+                width = obj.get_pw()
+                height = obj.get_ph()
+                img = pygame.transform.scale(img, (width, height))
                 self.paint_player(surface, engine, control, obj, img)
 
 
@@ -303,17 +308,17 @@ class Display(BaseDisplay):
                 print "Unexpected object type: %s" % (str(obj.__class__))
                 
         # draw game data
-        if control.show_info:
-            self.paint_game_status(surface, engine, control)
+        
+        self.paint_game_status(surface, engine, control)
         return
 
-    def tick(self, cycle):
+    def tick(self, obj, cycle):
         
-        step = obj.get_distance()%cycle
+        step = int((obj.get_distance()%cycle)/5)
+        print "step",step
 
-        for i in range(2,cycle,3):
-            if step < i:
-                return i/3
+        return step
+            
 
 
 

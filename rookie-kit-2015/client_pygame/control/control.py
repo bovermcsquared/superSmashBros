@@ -7,6 +7,8 @@ import pygame
 import math
 import config
 from client.base_control import *
+from character import *
+
 
 class Control(BaseControl):
     """
@@ -106,7 +108,10 @@ class Control(BaseControl):
 
         # self.chars= ['kirby','link','mario','luigi']
         # self.name = self.chars[(random.randint(0,3)]
-            # 
+        # 
+
+        self.Link = Character
+
         return
 
     def pregame_control(self, engine, keys, newkeys, buttons, newbuttons, mouse_position):
@@ -162,6 +167,7 @@ class Control(BaseControl):
         
             
             # if 1 in newbuttons:
+
 
         if 1 in newbuttons:
             if mouse_position[0] in range(340, 556):
